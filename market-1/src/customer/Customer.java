@@ -1,14 +1,13 @@
 package customer;
 
 public class Customer {
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
     private String email;
     private double balance;
 
-    public Customer(int id, String firstName, String lastName, String email, double balance) {
-        this.id = id;
+    public Customer(String firstName, String lastName, String email, double balance) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -47,11 +46,11 @@ public class Customer {
         this.firstName = firstName;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }
