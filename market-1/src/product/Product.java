@@ -12,6 +12,12 @@ public class Product {
         this.stock=stock;
         this.price=price;
     }
+    public void toPrint(){
+        System.out.println("\n"+"Barcode: " + this.barcode);
+        System.out.println("Name: " + this.name);
+        System.out.println("Stock: " + this.stock);
+        System.out.println("Price: " + this.price);
+    }
 
     public int getStock() {
         return stock;
@@ -35,5 +41,13 @@ public class Product {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
