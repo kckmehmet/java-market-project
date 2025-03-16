@@ -1,13 +1,14 @@
 package CashRegister;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CashRegisterService {
 
     ArrayList<CashRegister> registers = new ArrayList<>();
-
-    public CashRegister createRegister(int id, String name) {
-        CashRegister cashRegister = new CashRegister(id, name, 0);
+    AtomicInteger idgenerator=new AtomicInteger(1000);
+    public CashRegister createRegister(String name) {
+        CashRegister cashRegister = new CashRegister(idgenerator.incrementAndGet(), name, 0);
         registers.add(cashRegister);
         return cashRegister;
     }
