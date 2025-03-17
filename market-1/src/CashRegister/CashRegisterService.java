@@ -1,11 +1,15 @@
 package CashRegister;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CashRegisterService {
 
-    ArrayList<CashRegister> registers = new ArrayList<>();
+    private ArrayList<CashRegister> registers=new ArrayList<>();
     AtomicInteger idgenerator=new AtomicInteger(1000);
     public CashRegister createRegister(String name) {
         CashRegister cashRegister = new CashRegister(idgenerator.incrementAndGet(), name, 0);
@@ -28,5 +32,24 @@ public class CashRegisterService {
             System.out.println("No CashRegister record found");
         }
     }
+
+    public void dataSave(String fileName){
+        try (ObjectOutputStream objectOutput=new ObjectOutputStream(new FileOutputStream(fileName))){
+            objectOutput.writeObject(registers);
+            System.out.println("files saved successfully");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<CashRegister> dataLoad(String fileName){
+        try (ObjectInputStream objectInput=new ObjectInputStream(new FileInputStream(fileName));){
+            ArrayList<CashRegister> loadRegisters= (ArrayList<CashRegister>) objectInput.readObject();
+            return loadRegisters;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
