@@ -130,8 +130,8 @@ public class ProductService {
         }
     }
 
-    public void dataSave(String fileName){
-        try (ObjectOutputStream outputStream=new ObjectOutputStream(new FileOutputStream(fileName))){
+    public void dataSave(String fileName) {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(fileName))) {
             outputStream.writeObject(products);
             System.out.println("files saved successfully");
         } catch (Exception e) {
@@ -139,10 +139,23 @@ public class ProductService {
         }
     }
 
-    public ArrayList<Product> dataLoad(String fileName){
-        try (ObjectInputStream inputStream=new ObjectInputStream(new FileInputStream(fileName))){
-            ArrayList<Product> loadProduct=(ArrayList<Product>) inputStream.readObject();
+    public ArrayList<Product> dataLoad(String fileName) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(fileName))) {
+            ArrayList<Product> loadProduct = (ArrayList<Product>) inputStream.readObject();
             return loadProduct;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addDataToList(String filename) {
+        try {
+            ArrayList<Product> loadProduct = dataLoad(filename);
+            for (Product lproduct : loadProduct) {
+                if (!products.contains(lproduct)) {
+                    products.add(lproduct);
+                }
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

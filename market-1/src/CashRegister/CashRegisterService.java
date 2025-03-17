@@ -1,5 +1,7 @@
 package CashRegister;
 
+import sales.Sale;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -50,6 +52,17 @@ public class CashRegisterService {
             throw new RuntimeException(e);
         }
     }
-
+    public void addDataToList(String filename) {
+        try {
+            ArrayList<CashRegister> loadRegisters=dataLoad(filename);
+            for (CashRegister register:loadRegisters){
+                if (registers.contains(register)){
+                    registers.add(register);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

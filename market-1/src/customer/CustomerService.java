@@ -1,5 +1,7 @@
 package customer;
 
+import product.Product;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -53,6 +55,19 @@ public class CustomerService {
         try (ObjectInputStream objetInput=new ObjectInputStream(new FileInputStream(fileName))){
             ArrayList<Customer> loadCustomer=(ArrayList<Customer>) objetInput.readObject();
             return loadCustomer;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addDataToList(String filename) {
+        try {
+            ArrayList<Customer> loadCustomer=dataLoad(filename);
+            for (Customer customer:loadCustomer){
+                if (!customers.contains(customer)){
+                    customers.add(customer);
+                }
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

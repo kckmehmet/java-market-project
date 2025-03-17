@@ -79,4 +79,17 @@ public class SalesService {
             throw new RuntimeException(e);
         }
     }
+
+    public void addDataToList(String filename) {
+        try {
+            ArrayList<Sale> loadSale = dataLoad(filename);
+            for (Sale sale : loadSale) {
+                if (!sales.contains(sale)) {
+                    sales.add(sale);
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
