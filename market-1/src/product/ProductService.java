@@ -1,6 +1,11 @@
 package product;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductService {
     ArrayList<Product> products = new ArrayList<>();
@@ -122,6 +127,24 @@ public class ProductService {
                 products.remove(product);
                 System.out.println("product successfully removed");
             }
+        }
+    }
+
+    public void dataSave(String fileName){
+        try (ObjectOutputStream outputStream=new ObjectOutputStream(new FileOutputStream(fileName))){
+            outputStream.writeObject(products);
+            System.out.println("files saved successfully");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Product> dataLoad(String fileName){
+        try (ObjectInputStream inputStream=new ObjectInputStream(new FileInputStream(fileName))){
+            ArrayList<Product> loadProduct=(ArrayList<Product>) inputStream.readObject();
+            return loadProduct;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 

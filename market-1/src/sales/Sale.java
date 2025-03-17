@@ -2,9 +2,11 @@ package sales;
 
 import product.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Sale {
+public class Sale implements Serializable {
+    private static final long serialVersionUID=1L;
     private double totalPrice;
     private long salesNumber;
     private ArrayList<Product> soldProducts;

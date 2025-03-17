@@ -2,6 +2,10 @@ package sales;
 
 import product.Product;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -56,4 +60,21 @@ public class SalesService {
 
     }
 
+    public void dataSave(String fileName){
+        try (ObjectOutputStream outputStream=new ObjectOutputStream(new FileOutputStream(fileName))){
+            outputStream.writeObject(sales);
+            System.out.println("files saved successfully");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Sale> dataLoad(String fileName){
+        try (ObjectInputStream inputStream=new ObjectInputStream(new FileInputStream(fileName))){
+            ArrayList<Sale> loadSale= (ArrayList<Sale>) inputStream.readObject();
+            return loadSale;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
