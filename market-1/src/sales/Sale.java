@@ -1,5 +1,6 @@
 package sales;
 
+import CashRegister.CashRegister;
 import product.Product;
 
 import java.io.Serializable;
@@ -10,12 +11,18 @@ public class Sale implements Serializable {
     private double totalPrice;
     private long salesNumber;
     private ArrayList<Product> soldProducts;
+    private CashRegister cashRegister;
 
-    public Sale(long salesNumber, ArrayList<Product> soldProducts, double totalPrice) {
+    public Sale(long salesNumber, ArrayList<Product> soldProducts, double totalPrice,CashRegister cashRegister) {
         this.salesNumber = salesNumber;
         this.soldProducts = soldProducts;
         this.totalPrice = totalPrice;
+        this.cashRegister=cashRegister;
     }
+
+    public CashRegister getCashRegister(){return cashRegister;}
+
+    public void setCashRegister(CashRegister cashRegister){this.cashRegister=cashRegister;}
 
     public double getTotalPrice() {
         return totalPrice;

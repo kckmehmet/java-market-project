@@ -1,5 +1,6 @@
 package sales;
 
+import CashRegister.CashRegister;
 import product.Product;
 
 import java.io.FileInputStream;
@@ -14,10 +15,11 @@ public class SalesService {
     ArrayList<Sale> sales = new ArrayList<>();
     AtomicLong idGenerator = new AtomicLong(1000L);
 
-    public Sale createSale(ArrayList<Product> products, double totalPrice) {
+    public Sale createSale(ArrayList<Product> products, double totalPrice, CashRegister cashRegister) {
         if (products.size() > 0 || totalPrice > 0) {
             try {
-                Sale sale = new Sale(idGenerator.incrementAndGet(), products, totalPrice);
+                Sale sale = new Sale(idGenerator.incrementAndGet(), products, totalPrice,cashRegister);
+                cashRegister.setCash(cashRegister.getCash()+totalPrice);
                 sales.add(sale);
                 return sale;
             } catch (Exception e) {
